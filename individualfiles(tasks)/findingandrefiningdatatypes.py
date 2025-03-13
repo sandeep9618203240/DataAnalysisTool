@@ -1,25 +1,8 @@
 import pandas as pd
 import numpy as np
-
-def fun(df,num,ot):
-    print(df.head())
-    for i in range(len(num)):
-        print(df[num[i]].isna().sum())
-    for i in range(len(ot)):
-        print(df[ot[i]].isna().sum())
-    
-        
-    
+ 
 file = input("Enter the file name: ").strip('"\'')
 df = pd.read_csv(file)
-numericals=[]
-others=[]
-for col in df.columns:
-    if pd.api.types.is_numeric_dtype(df[col]):
-        numericals.append(col)
-    else:
-        others.append(col)
-fun(df,numericals,others)
 
 
 data=df
@@ -31,14 +14,46 @@ def datatypescheck(data):
     print("\n")
     print("if any data type is not correct then enter the index and its type to change ")
     index=int(input("enter the index"))
+    # if index>i:
+    #     print("your choice is out of bounds / please re enter your choice ")
+    #     op=int(input("enter here:"))
+    #     index=op
+    print("enter the data type you that is correct for the column")
+    dty=input("enter here :")
+    change_type(dty,index,data)
+    
+    # if index
 
-    if index>i:
+def check_index(index,data):
+    if index>len(data.columns):
         print("your choice is out of bounds / please re enter your choice ")
         op=int(input("enter here:"))
         index=op
+        if index<=len(data.columns):
+            return index
+        else:
+            check_index(index,data)
+    return index
 
-    print("enter the data type you that is correct for the column")
-    dty=input("enter here :")
+def change_type(dt,index,data):
+    ind=check_index(index,data)
+    cname=data.columns[ind]
+    # if dt in ["int","str", "bool","float","datetime","object"] :
+    #     if dt=="int":
+    #         data[cname]=data[cname].astype(dt)
+    if dt in ["int", "str", "bool", "float", "datetime", "object"]:
+        if dt == "datetime":
+            data[cname] = pd.to_datetime(data[cname])  # Convert to datetime
+        else:
+            data[cname] = data[cname].astype(dt)  # Convert to specified type
+    else:
+        raise ValueError("❌ Invalid data type")
+    print(data.dtypes)
+   
+
 
 datatypescheck(data)
+
+
+
 
