@@ -38,9 +38,6 @@ def check_index(index,data):
 def change_type(dt,index,data):
     ind=check_index(index,data)
     cname=data.columns[ind]
-    # if dt in ["int","str", "bool","float","datetime","object"] :
-    #     if dt=="int":
-    #         data[cname]=data[cname].astype(dt)
     if dt in ["int", "str", "bool", "float", "datetime", "object"]:
         if dt == "datetime":
             data[cname] = pd.to_datetime(data[cname])  # Convert to datetime

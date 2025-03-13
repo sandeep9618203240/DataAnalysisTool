@@ -4,9 +4,14 @@ import numpy as np
 
 def fun(df,num,ot):
     print(df.head())
+    print("numerical columns are")
     for i in range(len(num)):
+        print("the column name is ",num[i],"contains null values :")
         print(df[num[i]].isna().sum())
+        print("\n")
+    print("other columns(object)")
     for i in range(len(ot)):
+        print("the column name is ",num[i],"contains null values :")
         print(df[ot[i]].isna().sum())
     
         
