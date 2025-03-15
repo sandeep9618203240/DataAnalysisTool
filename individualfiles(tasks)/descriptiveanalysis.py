@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import numpy as np
+import seaborn as sns
 file = input("Enter the file name: ").strip('"\'')
 df = pd.read_csv(file)
 
@@ -33,3 +34,20 @@ def centratendencies(data,nums,cats):
 
 centratendencies(df,numericals,others)
 # def measureofdispersion(data,nums,cats):
+
+
+
+def measure_of_dispersion(df,rangeclm):
+    range=df[rangeclm].max()-df[rangeclm].min()
+    var=round(df[rangeclm].var())
+    std=round(df[rangeclm].std())
+
+rangecolumn=input("Enter the column name to get the range: ")
+measure_of_dispersion(df[rangecolumn])
+
+def IQR(df):
+    q1=np.percentile(df,25)
+    q3=np.percentile(df,75)
+    iqr=q3-q1
+    sns.boxpolt(df)
+
